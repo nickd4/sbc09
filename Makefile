@@ -1,6 +1,6 @@
 
 CC=gcc
-CFLAGS= -O1
+#CFLAGS= -O1
 V09FLAGS= -DUSE_TERMIOS #-DBIG_ENDIAN
 
 all: a09 v09 v09.rom examples 

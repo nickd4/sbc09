@@ -29,6 +29,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h> /* Nick */
 
 #define engine extern
 
@@ -38,6 +39,10 @@ FILE *tracefile;
 
 void do_trace(void)
 {
+#if 1
+  fprintf(tracefile,"pc=%04x x=%04x y=%04x u=%04x s=%04x a=%02x b=%02x cc=%02x\n",
+                   pcreg,xreg,yreg,ureg,sreg,*areg,*breg,(ccreg&~0x20));
+#else
  Word pc=pcreg;
  Byte ir;
  fprintf(tracefile,"pc=%04x ",pc);
@@ -47,6 +52,7 @@ void do_trace(void)
     fprintf(tracefile,"%02x ",mem[pc]);else fprintf(tracefile,"   ");
      fprintf(tracefile,"x=%04x y=%04x u=%04x s=%04x a=%02x b=%02x cc=%02x\n",
                    xreg,yreg,ureg,sreg,*areg,*breg,ccreg);
+#endif
 } 
  
 read_image()
@@ -105,7 +111,10 @@ main(int argc,char *argv[])
  #endif
  read_image(); 
  set_term(escchar);
- pcreg=(mem[0xfffe]<<8)+mem[0xffff]; 
+ pcreg=(mem[0xfffe]<<8)+mem[0xffff];
+#if 1 /* Nick */
+ ccreg=0x50;
+#endif
  interpr();
 }
 

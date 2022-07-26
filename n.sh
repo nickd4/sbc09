@@ -13,4 +13,4 @@ then
 fi
 dd if=/dev/zero of=v09.rom bs=1024 count=16
 cat ExBasROM.bin >>v09.rom
-./v09 <basic_test.txt
+./v09 -t good <basic_test.txt

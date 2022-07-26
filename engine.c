@@ -504,7 +504,7 @@ void interpr(void)
    case 0x0B: break; /*ILLEGAL*/
    case 0x0C: /*INC direct*/ DIRECT tb=mem[eaddr]+1;if(tb==0x80)SEV else CLV
    			     SETNZ8(tb) SETBYTE(eaddr,tb)break;   			                                  
-   case 0x0D: /*TST direct*/ DIRECT tb=mem[eaddr];SETNZ8(tb) break;
+   case 0x0D: /*TST direct*/ DIRECT tb=mem[eaddr];SETNZ8(tb) CLV break;
    case 0x0E: /*JMP direct*/ DIRECT ipcreg=eaddr;break;
    case 0x0F: /*CLR direct*/ DIRECT SETBYTE(eaddr,0);CLN CLV SEZ CLC break;
    case 0x10: /* flag10 */ iflag=1;goto flaginstr;
@@ -679,7 +679,7 @@ void interpr(void)
    case 0x4B: break; /*ILLEGAL*/
    case 0x4C: /*INCA*/  tb=iareg+1;if(tb==0x80)SEV else CLV
    			     SETNZ8(tb) iareg=tb;break;   			                                  
-   case 0x4D: /*TSTA*/  SETNZ8(iareg) break;
+   case 0x4D: /*TSTA*/  SETNZ8(iareg) CLV break;
    case 0x4E: break; /*ILLEGAL*/
    case 0x4F: /*CLRA*/  iareg=0;CLN CLV SEZ CLC break;
    case 0x50: /*NEGB*/  tw=-ibreg;SETSTATUS(0,ibreg,tw)
@@ -712,7 +712,7 @@ void interpr(void)
    case 0x5B: break; /*ILLEGAL*/
    case 0x5C: /*INCB*/  tb=ibreg+1;if(tb==0x80)SEV else CLV
    			     SETNZ8(tb) ibreg=tb;break;   			                                  
-   case 0x5D: /*TSTB*/  SETNZ8(ibreg) break;
+   case 0x5D: /*TSTB*/  SETNZ8(ibreg) CLV break;
    case 0x5E: break; /*ILLEGAL*/
    case 0x5F: /*CLRB*/  ibreg=0;CLN CLV SEZ CLC break;
    case 0x60: /*NEG indexed*/  tw=-mem[eaddr];SETSTATUS(0,mem[eaddr],tw)
@@ -746,7 +746,7 @@ void interpr(void)
    case 0x6B: break; /*ILLEGAL*/
    case 0x6C: /*INC indexed*/  tb=mem[eaddr]+1;if(tb==0x80)SEV else CLV
    			     SETNZ8(tb) SETBYTE(eaddr,tb)break;   			                                  
-   case 0x6D: /*TST indexed*/  tb=mem[eaddr];SETNZ8(tb) break;
+   case 0x6D: /*TST indexed*/  tb=mem[eaddr];SETNZ8(tb) CLV break;
    case 0x6E: /*JMP indexed*/  ipcreg=eaddr;break;
    case 0x6F: /*CLR indexed*/  SETBYTE(eaddr,0)CLN CLV SEZ CLC break;
    case 0x70: /*NEG ext*/ EXTENDED tw=-mem[eaddr];SETSTATUS(0,mem[eaddr],tw)
@@ -780,7 +780,7 @@ void interpr(void)
    case 0x7B: break; /*ILLEGAL*/
    case 0x7C: /*INC ext*/ EXTENDED tb=mem[eaddr]+1;if(tb==0x80)SEV else CLV
    			     SETNZ8(tb) SETBYTE(eaddr,tb)break;   			                                  
-   case 0x7D: /*TST ext*/ EXTENDED tb=mem[eaddr];SETNZ8(tb) break;
+   case 0x7D: /*TST ext*/ EXTENDED tb=mem[eaddr];SETNZ8(tb) CLV break;
    case 0x7E: /*JMP ext*/ EXTENDED ipcreg=eaddr;break;
    case 0x7F: /*CLR ext*/ EXTENDED SETBYTE(eaddr,0)CLN CLV SEZ CLC break;
    case 0x80: /*SUBA immediate*/ IMM8 tw=iareg-mem[eaddr];
