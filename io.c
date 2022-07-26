@@ -35,6 +35,8 @@
 #include <unistd.h>
 #include <fcntl.h>
 
+#include <string.h> /* Nick */
+
 #ifdef USE_TERMIOS
 #include <termios.h>
 #endif
@@ -70,8 +72,14 @@ int char_input(void)
     }
     if(c=='\n')c='\r';
     return c; 
-  } else   
+  }
+#if 1 /* Nick */
+  c=getchar();
+  if(c=='\n')c='\r';
+  return c;
+#else
   return getchar();
+#endif
  }else if(xmstat==1) {
   if(xidx) {
    c=xmbuf[xidx++];

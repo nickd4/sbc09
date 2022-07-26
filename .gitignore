@@ -1,0 +1,15 @@
+*.bin
+*.hex
+*.lst
+*.o
+*.rom
+*.s
+/ExBasRom.zip
+/a09
+/asmtest
+/basic
+/bench09
+/bin2dec
+/makerom
+/test09
+/v09

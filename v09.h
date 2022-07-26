@@ -25,7 +25,11 @@ engine volatile int tracing,attention,escape,irq;
 engine Word tracehi,tracelo;
 engine char escchar;
 
+#if 1 /* Nick */
+#define IOPAGE 0xa000
+#else
 #define IOPAGE 0xe000
+#endif
 
 void interpr(void);
 void do_exit(void);
